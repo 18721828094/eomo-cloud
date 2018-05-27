@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>eomo-cloud</artifactId>
+        <groupId>com.prato.cloud</groupId>
+        <version>1.2.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>eomo-common</artifactId>
+    <version>1.2.0</version>
+
+    <name>eomo-common</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <poi.version>3.17</poi.version>
+        <pdfbox.version>2.0.9</pdfbox.version>
+        <icepdf.version>6.1.2</icepdf.version>
+        <openoffice.version>4.1.2</openoffice.version>
+        <dynamicreports.version>5.1.0</dynamicreports.version>
+        <simpleimage.version>1.2.3</simpleimage.version>
+        <pinyin4j.version>2.5.1</pinyin4j.version>
+    </properties>
+
+    <dependencies>
+        <!-- thrift -->
+        <dependency>
+            <groupId>org.apache.thrift</groupId>
+            <artifactId>libthrift</artifactId>
+            <version>${thrift.version}</version>
+            <type>pom</type>
+        </dependency>
+        <!-- doc 转换相关 -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-excelant</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-examples</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <!-- pdfbox -->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>${pdfbox.version}</version>
+        </dependency>
+        <!-- icepdf -->
+        <dependency>
+            <groupId>org.icepdf.os</groupId>
+            <artifactId>icepdf-viewer</artifactId>
+            <version>${icepdf.version}</version>
+        </dependency>
+        <!-- openoffice -->
+        <dependency>
+            <groupId>org.openoffice</groupId>
+            <artifactId>juh</artifactId>
+            <version>${openoffice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openoffice</groupId>
+            <artifactId>ridl</artifactId>
+            <version>${openoffice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openoffice</groupId>
+            <artifactId>unoil</artifactId>
+            <version>${openoffice.version}</version>
+        </dependency>
+        <!-- 报表相关 -->
+        <!--<dependency>
+            <groupId>net.sourceforge.dynamicreports</groupId>
+            <artifactId>dynamicreports-core</artifactId>
+            <version>${dynamicreports.version}</version>
+        </dependency>-->
+        <!-- doc 转换相关 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>simpleimage</artifactId>
+            <version>${simpleimage.version}</version>
+            <!--使用spring boot时会和默认引入的log4j-over-slf4j冲突，需要干掉 -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- 拼音工具类 -->
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>${pinyin4j.version}</version>
+        </dependency>
+    </dependencies>
+</project>

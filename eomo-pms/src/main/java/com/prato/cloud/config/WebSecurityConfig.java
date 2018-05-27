@@ -1,0 +1,73 @@
+package com.prato.cloud.config;
+
+import com.prato.cloud.security.LoginUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+/**
+ * 安全登录-控制配置类
+ */
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private LoginUserService loginUserService;
+    @Autowired
+    private SessionRegistry sessionRegistry;
+
+    @Bean
+    public SessionRegistry getSessionRegistry(){
+        SessionRegistry sessionRegistry=new SessionRegistryImpl();
+        return sessionRegistry;
+    }
+
+    /**
+     * 允许登录的用户限制
+     *
+     * @param auth
+     * @throws Exception
+     */
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(loginUserService).passwordEncoder(new BCryptPasswordEncoder());
+    }
+
+    /**
+     * 路径拦截配置
+     *
+     * @param http
+     * @throws Exception
+     */
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/welcome")
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        //解决静态资源被拦截的问题
+        web.ignoring().antMatchers("/css/**");
+        web.ignoring().antMatchers("/images/**");
+        web.ignoring().antMatchers("/js/**");
+    }
+}

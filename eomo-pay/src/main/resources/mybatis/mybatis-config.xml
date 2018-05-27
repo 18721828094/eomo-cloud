@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!--数据库驱动 -->
+    <classPathEntry location="D:\maven\repository\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar"/>
+
+    <context id="MysqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/basin?useSSL=false"
+                        userId="root"
+                        password="root"/>
+
+        <!--强制对逆向生成文件转码处理 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <!-- 由于beginningDelimiter和endingDelimiter的默认值为双引号(")，在Mysql中不能这么写，所以还要将这两个默认值改为`  -->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <property name="useActualColumnNames" value="false"/>
+
+        <!-- 生成一个新的selectByExample方法，这个方法可以接收offset和limit参数，主要用来实现分页 -->
+        <plugin type="com.prato.cloud.plugin.PaginationPlugin"></plugin>
+
+        <!-- 为生成的Java模型类添加序列化接口，并生成serialVersionUID字段 -->
+        <plugin type="com.prato.cloud.plugin.SerializablePlugin">
+            <property name="suppressJavaInterface" value="false"/>
+        </plugin>
+
+        <!-- 为生成的Java模型创建一个toString方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+
+        <!-- Java模型生成equals和hashcode方法 -->
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"></plugin>
+
+        <!-- 可选项，旨在创建class时，对注释进行控制 -->
+        <commentGenerator type="com.prato.cloud.plugin.CommentGenerator">
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- 非必需，类型处理器，在数据库类型和java类型之间的转换控制-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!-- Model生成 -->
+        <javaModelGenerator targetPackage="com.prato.cloud.live.model" targetProject="src/main/java">
+            <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
+            <property name="enableSubPackages" value="true" />
+            <!-- 是否对model添加 构造函数 -->
+            <property name="constructorBased" value="false"/>
+            <!-- 是否对类CHAR类型的列的数据进行trim操作 -->
+            <property name="trimStrings" value="true" />
+            <!-- 建立的Model对象是否 不可改变  即生成的Model对象不会有 setter方法，只有构造方法 -->
+            <property name="immutable" value="false"/>
+        </javaModelGenerator>
+
+        <!-- MapperXML生成 -->
+        <sqlMapGenerator targetPackage="mybatis.mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!-- Mapper接口生成 -->
+        <javaClientGenerator targetPackage="com.prato.cloud.live.mapper" targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+        
+        <!-- 指定需要映射的数据库表 -->
+        <!-- 用户管理模块表 -->
+        <table schema="" tableName="sys_user" domainObjectName="User"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 角色管理模块表 -->
+        <table schema="" tableName="sys_role" domainObjectName="Role"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 权限管理模块表 -->
+        <table schema="" tableName="sys_popedom" domainObjectName="Popedom"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 会员管理模块表 -->
+        <table schema="" tableName="sys_member" domainObjectName="Member"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 机构管理模块表 -->
+        <table schema="" tableName="sys_org" domainObjectName="Org"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 地区管理模块表 -->
+        <table schema="" tableName="sys_area" domainObjectName="Area"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 字典管理模块表 -->
+        <table schema="" tableName="sys_dictionary" domainObjectName="Dictionary"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 日志管理模块表 -->
+        <table schema="" tableName="sys_log" domainObjectName="Log"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 文章管理模块表 -->
+        <table schema="" tableName="eomo_aws_article" domainObjectName="Article"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 分类管理模块表 -->
+        <table schema="" tableName="eomo_aws_category" domainObjectName="Category"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 站点管理模块表 -->
+        <table schema="" tableName="eomo_aws_site" domainObjectName="Site"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 站点详情管理模块表 -->
+        <table schema="" tableName="eomo_aws_visit_detail" domainObjectName="VisitDetail"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 站点在线管理模块表 -->
+        <table schema="" tableName="eomo_aws_visit_online" domainObjectName="VisitOnline"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 文件管理模块表 -->
+        <table schema="" tableName="eomo_aws_file" domainObjectName="FileInfo"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 点赞管理模块表 -->
+        <table schema="" tableName="eomo_aws_favourite" domainObjectName="Favourite"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 反馈管理模块表 -->
+        <table schema="" tableName="eomo_aws_feedback" domainObjectName="FeedBack"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 通知管理模块表 -->
+        <table schema="" tableName="eomo_aws_notice" domainObjectName="Notice"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 职位管理模块表 -->
+        <table schema="" tableName="eomo_aws_post" domainObjectName="Post"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 考勤管理模块表 -->
+        <table schema="" tableName="eomo_aws_attend" domainObjectName="Attend"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 项目管理模块表 -->
+        <table schema="" tableName="eomo_aws_project" domainObjectName="Project"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 服务产品管理模块表 -->
+        <table schema="" tableName="eomo_aws_product" domainObjectName="Product"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 项目报销单管理模块表 -->
+        <table schema="" tableName="eomo_aws_reimburse" domainObjectName="Reimburse"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 客户单管理模块表 -->
+        <table schema="" tableName="eomo_aws_customer" domainObjectName="Customer"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 客户需求管理模块表 -->
+        <table schema="" tableName="eomo_aws_demand" domainObjectName="Demand"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 电子合同管理模块表 -->
+        <table schema="" tableName="eomo_aws_contract" domainObjectName="Contract"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 采购产品管理模块表 -->
+        <table schema="" tableName="eomo_aws_purchase" domainObjectName="Purchase"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 渠道管理模块表 -->
+        <table schema="" tableName="eomo_aws_channel" domainObjectName="Channel"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 发布手段管理模块表 -->
+        <table schema="" tableName="eomo_aws_sendmethod" domainObjectName="SendMethod"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 渠道绑定管理模块表 -->
+        <table schema="" tableName="eomo_aws_channelbindme" domainObjectName="ChannelBindMe"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 群组管理模块表 -->
+        <table schema="" tableName="eomo_aws_group" domainObjectName="Group"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 群组用户管理模块表 -->
+        <table schema="" tableName="eomo_aws_groupuser" domainObjectName="GroupUser"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 终端设备管理模块表 -->
+        <table schema="" tableName="eomo_aws_facility" domainObjectName="Facility"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 信息管理模块表 -->
+        <table schema="" tableName="eomo_aws_message" domainObjectName="Message"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 要素管理模块表 -->
+        <table schema="" tableName="eomo_aws_element" domainObjectName="Element"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 供应商管理模块表 -->
+        <table schema="" tableName="eomo_aws_vendor" domainObjectName="Vendor"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 工作计划管理模块表 -->
+        <table schema="" tableName="eomo_aws_schedule" domainObjectName="Schedule"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 培训计划管理模块表 -->
+        <table schema="" tableName="eomo_aws_train" domainObjectName="Train"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <!-- 员工薪酬管理模块表 -->
+        <table schema="" tableName="eomo_aws_salary" domainObjectName="Salary"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="t_trans_order" domainObjectName="TransOrder">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <table tableName="t_refund_order" domainObjectName="RefundOrder">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <!--<table tableName="t_mch_notify" domainObjectName="MchNotify"><property name="useActualColumnNames" value="true" /></table>-->
+    </context>
+</generatorConfiguration>
